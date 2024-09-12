@@ -10,3 +10,9 @@ This project uses the phi3-mini model to perform sentiment analysis on predefine
 2. Create a conda environment:
    ```bash
    conda env create -f requirements.yaml
+3. Activate the enviroment
+   ```bash
+   conda activate sentiment-analysis-env
+4. Run the main script
+   ```bash
+   python main.py 
