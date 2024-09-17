@@ -34,7 +34,7 @@ with open('responses.txt', 'w') as file:
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Load the model and tokenizer
-model_name = "/Users/dazeddamo/Downloads/Phi-3-mini-4k-instruct-q4.gguf"  # Path to model location
+model_name = "/Users/dazeddamo/Downloads/Phi-3-mini-4k-instruct-q4/"  # Path to model location
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(model_name)
 
