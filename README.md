@@ -5,6 +5,11 @@
 ## Overview
 This project utilizes the phi3-mini model to perform sentiment analysis on predefined prompts. The script reads user prompts from a file (`prompts.txt`), sends these prompts to the model, and writes the responses to an output file (`results.txt`).
 
+## Features
+- **Prompt Handling**: Reads multiple questions from `prompts.txt`.
+- **Model Interaction**: Utilizes the specified Hugging Face model (`microsoft/Phi-3-mini-4k-instruct`) for generating responses.
+- **Output Management**: Saves the generated responses to `results.txt`, organizing them alongside their corresponding prompts.
+
 ## Setup Instructions
 1. Clone the repository. (Only works when public)
    ```bash
