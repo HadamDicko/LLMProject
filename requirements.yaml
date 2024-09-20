@@ -1,9 +1,11 @@
-name: sentiment-analysis-env
+```yaml
+name: phi3-env
 channels:
   - defaults
 dependencies:
-  - python=3.8
+  - python=3.12.5
   - pip
   - pip:
-      - transformers
       - torch
+      - transformers
+      - accelerate
