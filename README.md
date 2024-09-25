@@ -26,4 +26,13 @@ This project utilizes the phi3-mini model to perform sentiment analysis on prede
    pip install huggingface-hub
 6. Run the main script
    ```bash
-   python main.py 
+   python main.py
+7. Check Results
+   ```bash
+   cat results.txt
+8. Debugging
+   ```bash
+   python --version
+   sudo apt update
+   sudo apt install python3 python3-pip
+   
