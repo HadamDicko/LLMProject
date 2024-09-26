@@ -15,22 +15,19 @@ This project utilizes the phi3-mini model to perform sentiment analysis on prede
    ```bash
    git clone https://github.com/HadamDicko/LLMProject
    cd LLMProject
-3. Create a conda environment:
+2. Create a conda environment:
    ```bash
    conda env create -f requirements.yaml
-4. Activate the enviroment
+3. Activate the enviroment
    ```bash
    conda activate phi3-env
-5. Install HuggingFace
-   ```bash
-   pip install huggingface-hub
-6. Run the main script
+4. Run the main script
    ```bash
    python main.py
-7. Check Results
+5. Check Results
    ```bash
    cat results.txt
-8. Debugging
+6. Debugging
    ```bash
    python --version
    sudo apt update
