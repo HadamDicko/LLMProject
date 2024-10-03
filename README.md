@@ -32,4 +32,8 @@ This project utilizes the phi3-mini model to perform sentiment analysis on prede
    python --version
    sudo apt update
    sudo apt install python3 python3-pip
-   
+
+   ![Screenshot 2024-10-03 at 9 42 15 AM](https://github.com/user-attachments/assets/c408ab44-e045-4d09-9c73-1f6929d6d145)
+
+
+
