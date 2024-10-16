@@ -1,39 +1,30 @@
-# LLM Sentiment Analysis Project
-
-## Hadam Dicko 
+# Web Scraping Project
 
 ## Overview
-This project utilizes the phi3-mini model to perform sentiment analysis on predefined prompts. The script reads user prompts from a file (`prompts.txt`), sends these prompts to the model, and writes the responses to an output file (`results.txt`).
+
+This project automates the process of downloading and saving user comments from different versions of a specified product. The software utilizes web scraping techniques to gather comments from multiple web pages and organizes them into separate output files for easy analysis.
 
 ## Features
-- **Prompt Handling**: Reads multiple questions from `prompts.txt`.
-- **Model Interaction**: Utilizes the specified Hugging Face model (`microsoft/Phi-3-mini-4k-instruct`) for generating responses.
-- **Output Management**: Saves the generated responses to `results.txt`, organizing them alongside their corresponding prompts.
+
+- Scrapes user comments from multiple versions of a product.
+- Saves the comments into individual text files for each version.
+- Easy to configure with input URLs.
+
+## Requirements
+
+Make sure to set up the environment using the provided `requirements.yml` file. This ensures that all necessary packages are installed.
+
+### Requirements File
+
+The project requires the following packages:
+- `requests`: For making HTTP requests to fetch web pages.
+- `beautifulsoup4`: For parsing HTML and extracting comments.
+- `pandas`: Optional for data manipulation and analysis.
 
 ## Setup Instructions
-1. Clone the repository. (Only works when public)
-   ```bash
-   git clone https://github.com/HadamDicko/LLMProject
-   cd LLMProject
-2. Create a conda environment:
-   ```bash
-   conda env create -f requirements.yaml
-3. Activate the enviroment
-   ```bash
-   conda activate phi3-env
-4. Run the main script
-   ```bash
-   python main.py
-5. Check Results
-   ```bash
-   cat results.txt
-6. Debugging
-   ```bash
-   python --version
-   sudo apt update
-   sudo apt install python3 python3-pip
 
-![Screenshot 2024-10-03 at 9 42 15 AM](https://github.com/user-attachments/assets/c408ab44-e045-4d09-9c73-1f6929d6d145)
-
-
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/yourusername/yourrepository.git
+   cd yourrepository
 
