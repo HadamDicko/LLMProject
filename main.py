@@ -1,33 +1,42 @@
-# main.py
+import requests
+from bs4 import BeautifulSoup
+import os
 
-from huggingface_hub import InferenceClient
+def fetch_comments(url):
+    """Fetch comments from a specified URL."""
+    try:
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad responses
+        soup = BeautifulSoup(response.text, 'html.parser')
 
-# Initialize the inference client with the model
-client = InferenceClient(
-    "microsoft/Phi-3-mini-4k-instruct",
-    token="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",
-)
+        # Modify the selector based on the actual HTML structure of the page
+        comments = soup.find_all(class_="user-comment")  # Example selector
 
-# Open the prompts file and read the questions
-with open("prompts.txt", "r") as prompts_file:
-    prompts = prompts_file.readlines()
+        return [comment.get_text(strip=True) for comment in comments]
+    except Exception as e:
+        print(f"Error fetching comments from {url}: {e}")
+        return []
 
-# Open the results file for writing
-with open("results.txt", "w") as results_file:
-    # Iterate through each prompt
-    for prompt in prompts:
-        # Strip whitespace and prepare the message
-        message_content = prompt.strip()
-        
-        # Send the message to the model
-        response = client.chat_completion(
-            messages=[{"role": "user", "content": message_content}],
-            max_tokens=500,
-            stream=False,  # Set to False to get the full response at once
-        )
+def save_comments(version, comments):
+    """Save comments to a file."""
+    filename = f"comments_version{version}.txt"
+    with open(filename, 'w', encoding='utf-8') as f:
+        for comment in comments:
+            f.write(comment + "\n")
+    print(f"Comments for version {version} saved to {filename}")
 
-        # Write the prompt and the response to the results file
-        results_file.write(f"Prompt: {message_content}\n")
-        results_file.write(f"Response: {response.choices[0].message['content']}\n\n")
+def main():
+    # Read URLs from an input file
+    with open("urls.txt", "r") as file:
+        urls = file.readlines()
 
-print("Responses saved to results.txt")
+    # Iterate over each URL and fetch comments
+    for i, url in enumerate(urls, start=1):
+        url = url.strip()
+        if url:  # Check if the URL is not empty
+            comments = fetch_comments(url)
+            if comments:
+                save_comments(i, comments)
+
+if __name__ == "__main__":
+    main()
