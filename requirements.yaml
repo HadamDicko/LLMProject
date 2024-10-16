@@ -1,12 +1,10 @@
-```yaml
-name: phi3-env
+name: webScraping-env
 channels:
   - defaults
 dependencies:
   - python=3.12.5
   - pip
   - pip:
-      - torch
-      - transformers
-      - accelerate
-      - huggingface_hub
+      - requests
+      - beautifulsoup4
+      - pandas
