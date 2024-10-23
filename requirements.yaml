@@ -2,9 +2,9 @@ name: webScraping-env
 channels:
   - defaults
 dependencies:
-  - python=3.12.5
+  - python=3.12.5 # Change if needed 
   - pip
-  - pip:
-      - requests
-      - beautifulsoup4
-      - pandas
+  - requests
+  - beautifulsoup4
+  - pandas
+  - lxml
