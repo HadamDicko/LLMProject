@@ -22,8 +22,17 @@ The project requires the following packages:
 
 ## Setup Instructions
 
-1. **Clone the repository**:
+1. **Clone the repository and switch branch**:
    ```bash
-   git clone https://github.com/yourusername/yourrepository.git
-   cd yourrepository
-
+   git clone [https://github.com/yourusername/yourrepository.git](https://github.com/HadamDicko/LLMProject/tree/webScrapping)
+   cd LLMProject
+   git checkout -b webScrapping
+2. **Create the conda environment**:
+   ```bash
+   conda env create -f requirements.yaml
+3. **Activate the environment**:
+   ```bash
+   conda activate webScraping-env
+4. **Run the script**:
+   ```bash
+   python main.py
