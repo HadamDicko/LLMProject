@@ -1,64 +1,20 @@
+import random
 import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 import time
-import random
 
-# Configure headers for requests
-user_agents = ['Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36',
+# List of User-Agent strings
+user_agents = [
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4894.117 Safari/537.36',
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4855.118 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4892.86 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4854.191 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4859.153 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.79 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36/null',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36,gzip(gfe)',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4895.86 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 12_3_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4860.89 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4885.173 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4864.0 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4877.207 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 12_2_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML%2C like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.133 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_16_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4872.118 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 12_3_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.88 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 11_13) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4876.128 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML%2C like Gecko) Chrome/100.0.4896.127 Safari/537.36',
-    'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36']
-
-HEADERS={"User-Agent":user_agents[random.randint(0,31)],"accept-language": "en-US,en;q=0.9","accept-encoding": "gzip, deflate, br","accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"}
-
-def getdata(url):
-    #Fetch the HTML content of the given URL
-    try:
-        r = requests.get(url, headers=HEADERS)
-        r.raise_for_status()  # Raise an error for bad responses
-        return r.text
-    except requests.RequestException as e:
-        print(f"Request failed: {e}")
-        return None
-
-def html_code(url):
-    #Parse the HTML content using BeautifulSoup
-    htmldata = getdata(url)
-    if htmldata:
-        return BeautifulSoup(htmldata, 'html.parser')
-    return None
+    # Add more User-Agents as needed
+]
 
 def check_captcha(soup):
-    #Check if the page contains a CAPTCHA
+    """Check if the page contains a CAPTCHA."""
     captcha_keywords = ["robot", "verification", "prove you are not a robot"]
     for keyword in captcha_keywords:
         if soup and keyword.lower() in soup.get_text().lower():
@@ -66,56 +22,79 @@ def check_captcha(soup):
     return False
 
 def solve_captcha(url):
-    # Use Selenium to handle CAPTCHA challenges.
-    # Set up the WebDriver (e.g., Chrome)
+    """Use Selenium to handle CAPTCHA challenges."""
     driver = webdriver.Chrome()  # Make sure ChromeDriver is in your PATH
     driver.get(url)
     
     # Pause to allow CAPTCHA to load and be solved manually
     print("CAPTCHA detected. Please solve it manually.")
-    time.sleep(10)  # Adjust this as necessary
+    time.sleep(30)  # Adjust this as necessary for manual solving
 
     # After solving, get the page source
     html = driver.page_source
     driver.quit()
     return html
 
-def cus_rev(soup):
-    #Extract customer reviews from the parsed HTML.
-    reviews = []
-    for item in soup.find_all("div", class_="a-expander-content reviewText review-text-content a-expander-partial-collapse-content"):
-        reviews.append(item.get_text(strip=True))
-    return reviews
+# Read URLs from 'urls.txt'
+with open('urls.txt', 'r') as file:
+    urls = [line.strip() for line in file.readlines() if line.strip()]
 
-def save_reviews(urls):
-    # Save reviews for each URL to separate files.
-    for idx, url in enumerate(urls, start=1):
-        print(f"Processing URL {idx}: {url}")
-        soup = html_code(url)
-        if soup:
-            if check_captcha(soup):
-                print("CAPTCHA detected. Attempting to solve it using Selenium.")
-                # Use Selenium to solve the CAPTCHA
-                html = solve_captcha(url)
-                soup = BeautifulSoup(html, 'html.parser')
+# Initialize file index
+file_index = 1
+counter = 0
 
-            reviews = cus_rev(soup)
-            if reviews:
-                with open(f'comments{idx}.txt', 'w', encoding='utf-8') as f:
-                    for review in reviews:
-                        f.write(f"{review}\n\n")
-                print(f"Saved {len(reviews)} reviews to comments{idx}.txt")
-            else:
-                print("No reviews found.")
-        else:
-            print("Failed to retrieve or parse the HTML.")
+# Process each URL
+for url in urls:
+    # Select a random User-Agent
+    user_agent = random.choice(user_agents)
+    headers = {
+        'User-Agent': user_agent,
+        'Accept-Language': 'en-US, en;q=0.5'
+    }
 
-def main():
-    #Main function to load URLs and start the scraping process.
-    with open('urls.txt', 'r') as file:
-        urls = [line.strip() for line in file.readlines() if line.strip()]
-    save_reviews(urls)
+    # Send a GET request
+    response = requests.get(url, headers=headers)
 
-if __name__ == "__main__":
-    main()
+    # Check if the request was successful
+    if response.status_code == 200:
+        # Parse the HTML content
+        soup = BeautifulSoup(response.content, 'html.parser')
+
+        # Check for CAPTCHA
+        if check_captcha(soup):
+            # If CAPTCHA is detected, solve it using Selenium
+            html = solve_captcha(url)
+            soup = BeautifulSoup(html, 'html.parser')  # Re-parse the page
+
+        # Find all review elements
+        reviews = soup.find_all('div', {'data-hook': 'review'})
+
+        # Open the appropriate comments file
+        with open(f'comments{file_index}.txt', 'a', encoding='utf-8') as file:
+            # Extract and write each review's details to the file
+            for review in reviews:
+                title = review.find('a', {'data-hook': 'review-title'}).get_text(strip=True)
+                body = review.find('span', {'data-hook': 'review-body'}).get_text(strip=True)
+                reviewer_name = review.find('span', class_='a-profile-name').get_text(strip=True)
+                review_date = review.find('span', {'data-hook': 'review-date'}).get_text(strip=True)
+
+                # Write review details to file
+                file.write(f"Reviewer: {reviewer_name}\n")
+                file.write(f"Review Title: {title}\n")
+                file.write(f"Review Body: {body}\n")
+                file.write(f"Review Date: {review_date}\n")
+                file.write("-" * 40 + "\n")
+
+        # Increment the counter
+        counter += 1
+
+        # Increment file index every 3 URLs
+        if counter % 5 == 0:
+            file_index += 1
+    else:
+        print(f"Failed to retrieve page: {response.status_code} for URL: {url}")
+
+
+
+
 
