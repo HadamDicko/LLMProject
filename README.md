@@ -24,7 +24,7 @@ The project requires the following packages:
 
 1. **Clone the repository and switch branch**:
    ```bash
-   git clone [https://github.com/yourusername/yourrepository.git](https://github.com/HadamDicko/LLMProject/tree/webScrapping)
+   git clone https://github.com/HadamDicko/LLMProject/tree/webScrapping
    cd LLMProject
    git checkout -b webScrapping
 2. **Create the conda environment**:
