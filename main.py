@@ -109,26 +109,27 @@ from selenium.common.exceptions import TimeoutException
 import logging
 from datetime import datetime
 
+# Setup logging for file/console
 logging.basicConfig(
     level=logging.DEBUG,
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler('scraper_debug.log'),
-        logging.StreamHandler()
+        logging.FileHandler('scraper_debug.log'), # File 
+        logging.StreamHandler()                   # Console
     ]
 )
 
 class AmazonScraper:
     def __init__(self):
-        self.setup_driver()
-        self.file_index = 1
-        self.counter = 0
+        self.setup_driver()     # Handles Chrome
+        self.file_index = 1     # Manages current output file
+        self.counter = 0        # Tracks # of reviews
 
-    def setup_driver(self):
-        """Setup Chrome driver with options"""
+    def setup_driver(self):     
+        # Setup Chrome driver
         options = webdriver.ChromeOptions()
         
-        # Add options to make browser more stable/stealthy
+        # Make browser more stable/stealthy
         options.add_argument('--disable-gpu')
         options.add_argument('--no-sandbox')
         options.add_argument('--disable-dev-shm-usage')
@@ -142,7 +143,7 @@ class AmazonScraper:
         self.driver.implicitly_wait(10)
 
     def login_to_amazon(self):
-        """Manual login process"""
+        # Manual login process done at start
         try:
             self.driver.get('https://www.amazon.com')
             input("Please log in to Amazon manually and press Enter when done...")
@@ -151,7 +152,7 @@ class AmazonScraper:
             logging.error(f"Error during login: {str(e)}")
 
     def extract_reviews(self, url):
-        """Extract reviews from a single page"""
+        # Extract reviews from a single page
         try:
             logging.info(f"Processing URL: {url}")
             self.driver.get(url)
@@ -187,7 +188,7 @@ class AmazonScraper:
             return []
 
     def save_reviews(self, reviews, url):
-        """Save reviews to file"""
+        # Save reviews to file
         if not reviews:
             logging.warning(f"No reviews to save for {url}")
             return
@@ -195,9 +196,9 @@ class AmazonScraper:
         try:
             filename = f'comments{self.file_index}.txt'
             with open(filename, 'a', encoding='utf-8') as file:
-                file.write(f"\nURL: {url}\n")
-                file.write(f"Timestamp: {datetime.now().isoformat()}\n")
-                file.write("-" * 40 + "\n")
+                #file.write(f"\nURL: {url}\n")
+                #file.write(f"Timestamp: {datetime.now().isoformat()}\n")
+                #file.write("-" * 40 + "\n")
                 
                 for review in reviews:
                     file.write(f"Review: {review['text']}\n")
@@ -206,14 +207,14 @@ class AmazonScraper:
             logging.info(f"Saved {len(reviews)} reviews to {filename}")
             
             self.counter += 1
-            if self.counter % 10 == 0:
-                self.file_index += 1
+            if self.counter % 10 == 0:      # 10 urls per txt file
+                self.file_index += 1        # Increment
 
         except Exception as e:
             logging.error(f"Error saving reviews: {str(e)}")
 
     def run(self, urls_file):
-        """Main execution method"""
+        # Main exe method
         try:
             # First, handle login
             self.login_to_amazon()
@@ -229,8 +230,8 @@ class AmazonScraper:
                     reviews = self.extract_reviews(url)
                     self.save_reviews(reviews, url)
                     
-                    # Add a longer delay between URLs
-                    time.sleep(random.uniform(5, 10))
+                    # Delay between URLs
+                    time.sleep(random.uniform(1, 3))
                     
                 except Exception as e:
                     logging.error(f"Error processing URL {url}: {str(e)}")
