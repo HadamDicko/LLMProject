@@ -61,7 +61,6 @@ Review: [review text]
 Review: [review text]
 ...
 ```
-![Screenshot 2024-12-01 at 12 57 03 PM](https://github.com/user-attachments/assets/111f318d-0821-4b4f-8d22-f5435ce828ff)
 
 ## Usage
 1. Prepare your review files following the input format above
@@ -83,6 +82,7 @@ Review: [review text]
      Sentiment: negative
      Sentiment: neutral
      ```
+![Screenshot 2024-12-01 at 12 57 03 PM](https://github.com/user-attachments/assets/111f318d-0821-4b4f-8d22-f5435ce828ff)
 
 2. Visualization:
    - Generates a bar graph showing:
