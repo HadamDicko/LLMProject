@@ -23,10 +23,9 @@ This project analyzes sentiment in product reviews using the Phi-3-mini-4k-instr
 ## Installation
 1. Clone the repository:
    ```bash
-   git clone [repository-url]
-   cd [project-directory]
+   git clone https://github.com/HadamDicko/LLMProject/tree/Sentient-Analysis
    ```
-
+   
 2. Install required packages:
    ```bash
    pip install huggingface_hub matplotlib numpy
