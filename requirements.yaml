@@ -1,11 +1,15 @@
-name: webScraping-env
+name: sentiment-analysis
 channels:
   - defaults
 dependencies:
-  - python=3.12.5 # Change if needed 
+  - python=3.12.5
   - pip
+  - huggingface_hub
+  - matplotlib
+  - numpy
+  - transformers
   - requests
   - beautifulsoup4
   - pandas
-  - selenium
   - lxml
+  - pytest
