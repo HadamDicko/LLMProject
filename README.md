@@ -82,7 +82,7 @@ Review: [review text]
      Sentiment: negative
      Sentiment: neutral
      ```
-![Screenshot 2024-12-01 at 12 57 03 PM](https://github.com/user-attachments/assets/111f318d-0821-4b4f-8d22-f5435ce828ff)
+![Screenshot 2024-12-01 at 2 26 13 PM](https://github.com/user-attachments/assets/8c478f1e-b53f-4bbd-aff5-d89c8f942b81)
 
 2. Visualization:
    - Generates a bar graph showing:
