@@ -88,6 +88,9 @@ Review: [review text]
      - Distribution of sentiments for each product
      - Color-coded bars (green=positive, gray=neutral, red=negative)
      - Numerical values for each sentiment category
+    
+    ![Screenshot 2024-12-01 at 12 56 02 PM](https://github.com/user-attachments/assets/70711295-8675-4da8-a09b-1b8837550ba4)
+
 
 ## Functions
 - `initialize_client()`: Sets up the HuggingFace client
