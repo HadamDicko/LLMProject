@@ -24,13 +24,16 @@ This project analyzes sentiment in product reviews using the Phi-3-mini-4k-instr
 1. Clone the repository:
    ```bash
    git clone https://github.com/HadamDicko/LLMProject/tree/Sentient-Analysis
+   cd LLMProject
+   git checkout -b Sentient-Analysis
    ```
    
-2. Install required packages:
+2. Install and activate required packages:
    ```bash
-   pip install huggingface_hub matplotlib numpy
+   conda env create -f requirements.yaml
+   conda activate webScraping-env
    ```
-
+   
 3. Set up HuggingFace authentication:
    - Create an account on HuggingFace
    - Generate an API token
@@ -52,9 +55,11 @@ project/
 Each comment file should follow this format:
 ```
 Review: [review text]
+----
 Review: [review text]
 ----
 Review: [review text]
+...
 ```
 
 ## Usage
@@ -107,8 +112,5 @@ The script includes error handling for:
 4. Push to the branch
 5. Create a Pull Request
 
-## License
-[Add your license information here]
-
 ## Contact
-[Add your contact information here]
+hadramedko@msn.com
