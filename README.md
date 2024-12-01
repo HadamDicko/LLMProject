@@ -61,6 +61,7 @@ Review: [review text]
 Review: [review text]
 ...
 ```
+![Screenshot 2024-12-01 at 12 56 02 PM](https://github.com/user-attachments/assets/b33daf61-ba34-4642-8a5d-09c7bae57d71)
 
 ## Usage
 1. Prepare your review files following the input format above
