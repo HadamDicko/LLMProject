@@ -31,7 +31,7 @@ This project analyzes sentiment in product reviews using the Phi-3-mini-4k-instr
 2. Install and activate required packages:
    ```bash
    conda env create -f requirements.yaml
-   conda activate webScraping-env
+   conda activate sentiment-analysis
    ```
    
 3. Set up HuggingFace authentication:
